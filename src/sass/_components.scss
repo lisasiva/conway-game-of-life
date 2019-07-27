@@ -54,8 +54,14 @@
         grid-template-columns: repeat(20, auto);
         border-top: 1px solid $color-gray-dark;
         border-left: 1px solid $color-gray-dark;
-        margin: 0 20rem;
         box-shadow: $box-shadow-light;
+        
+        // TESTING
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -53%);
+        
     }
     
     &__cell {
@@ -73,7 +79,9 @@
     
 }
 
-
+.grid-wrapper {
+    width: 100%;
+}
 
 //////////////////////////////////
 // CONTROLS
