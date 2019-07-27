@@ -4,10 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "sass:watch": "node-sass src/sass/main.scss dist/css/style.css -w",
+    "sass:watch": "node-sass src/sass/main.scss docs/css/style.css -w",
     "webpack:prod": "webpack --mode production",
     "webpack:devserver": "webpack-dev-server --mode development --open",
-    "start": "npm-run-all --parallel sass:watch webpack:devserver"
+    "start": "npm-run-all --parallel sass:watch webpack:devserver",
+    "sass:compile": "node-sass src/sass/main.scss docs/css/style.comp.css",
+    "css:prefix": "postcss --use autoprefixer -b 'last 10 versions' docs/css/style.comp.css -o docs/css/style.prefix.css",
+    "css:compress": "node-sass docs/css/style.prefix.css docs/css/style.css --output-style compressed",
+    "build": "npm-run-all sass:compile css:prefix css:compress webpack:prod"
   },
   "author": "",
   "license": "ISC",
