@@ -1,170 +1,104 @@
 /*jslint esnext: true*/
 
-import CellularAutomata from 'cellular-automata';
+// Elements from DOM
+import { DOM } from './base';
 
+// Class to store and get game data
+import Game from './game';
 
-//////////////////////////////////
-// DOM ELEMENTS
-//////////////////////////////////
+// Helper functions to get user input and render to DOM
+import * as gameView from './gameView';
 
-const DOM = {
-    grid: document.querySelector('.game__board'),
-    cell: document.querySelector('.game__cell'),
-    btnPlay: document.querySelector('.controls__button--play'),
-    btnIterate: document.querySelector('.controls__button--iterate'),
-    btnResize: document.querySelector('.controls__size-button'),
-    inputHeight: document.getElementById('height'),
-    inputWidth: document.getElementById('width'),
+const state = {
+    // Instance of Game class
+        // data array
+    // Current height of board
+    // Current width of board
 };
 
 //////////////////////////////////
-// SETTING UP GRID
+// INITIALIZE GAME
 //////////////////////////////////
 
-const getGridSize = () => {
-    let height = DOM.inputHeight.value;
-    let width = DOM.inputWidth.value;
+const init = (() => {
+    // Render 20 x 20 game board
+    gameView.renderBoard(0, 400);
     
-    if (!height || height < 20 ) {
-        if (height < 20) {
-            alert('🙏 To avoid breaking this design, height can be no fewer than 20 cells');    
-        }
-        height = 20;
-        DOM.inputHeight.value = 20;
-    } else if (height > 50) {
-        height = 50;
-        DOM.inputHeight.value = 50;
-        alert('To avoid breaking this design, height can be no more than 50 cells. 😁');
-    }
+    // Instantiate Game class 
+    state.game = new Game();
     
-    if (!width || width < 20) {
-        if (width < 20) {
-            alert('👋 To avoid breaking this design, width can be no fewer than 20 cells.');    
-        }
-        width = 20;
-        DOM.inputWidth.value = 20;
-    } else if (width > 50) {
-        width = 50;
-        DOM.inputWidth.value = 50;
-        alert('To avoid breaking this design, width can be no more than 50 cells. 🙃');
-    }
-    
-    return [height, width];
-};
-
-
-const renderBoard = (start, end) => {
-    if (start < end) {
-        for (let i=start; i < end; i++) {
-            let cell = document.createElement("div");
-            cell.classList.add('game__cell', `game__cell--${i}`);
-            DOM.grid.appendChild(cell);
-        } 
-    // Start at 900 // End at 400    
-    } else if (start > end) {
-        for (let i = start - 1; i >= end; i--) {
-            const cell = document.querySelector(`.game__cell--${i}`);
-            DOM.grid.removeChild(cell);
-        }
-    }  
-};
-
-const resizeCells = (size) => {
-    const cells = [...document.querySelectorAll('.game__cell')];
-    if (size === 'medium') {
-        cells.forEach(el => {
-            el.style.width = '15px';
-            el.style.height = '15px';
-        });        
-    } else if (size === 'small') {
-        cells.forEach(el => {
-            el.style.width = '10px';
-            el.style.height = '10px';
-        });
-    } else if (size === 'tiny') {
-        cells.forEach(el => {
-            el.style.width = '8px';
-            el.style.height = '8px';
-        });
-    }
-
-};
-
-const clearBoard = () => {
-    const cells = [...document.querySelectorAll('.game__cell--live')];
-    
-    cells.forEach(el => {
-        el.classList.toggle('game__cell--live');
-    });
-};
-
-
-const getData = (shouldIterate, height=20, width=20) => {
-    const cellularAutomata = new CellularAutomata([height, width]); 
-    cellularAutomata.fillWithDistribution([[0, 95], [1, 5]]);
-    
-    if (shouldIterate) {
-        cellularAutomata.setRule('23/3').iterate(1);
-    }
-
-    return cellularAutomata.array.data;
-};
-
-const renderGame = (data) => {
-    for (let i=0; i < data.length; i++) {
-        const cell = document.querySelector(`.game__cell--${i}`);
-        if (data[i] === 1) {
-            cell.classList.add('game__cell--live');
-        }
-    }    
-};
+    // Initialize height and width to 20
+    [state.height, state.width] = gameView.getGridSize();    
+})();
 
 
 //////////////////////////////////
-// EVENT LISTENERS
+// WHEN USER PRESSES PLAY 
 //////////////////////////////////
-
-renderBoard(0, 400);
 
 DOM.btnPlay.addEventListener('click', () => {
-    clearBoard();
-    let [currentHeight, currentWidth] = getGridSize();
-    let data = getData(false, currentHeight, currentWidth);
-    renderGame(data);
+    // Remove class 'game__cell--live' from live cells 
+    gameView.clearBoard();
+    
+    // Get new game data  
+    state.game.getData(false, state.height, state.width);
+    
+    // Turn on live cells
+    gameView.renderGame(state.game.data);
 });
+
+//////////////////////////////////
+// WHEN USER PRESSES ITERATE
+//////////////////////////////////
 
 DOM.btnIterate.addEventListener('click', () => {
-    let [currentHeight, currentWidth] = getGridSize();
-    let data = getData(true, currentHeight, currentWidth);
-    renderGame(data);
+    // If the user has not pressed play yet, alert
+    if (state.game.data.length === 0) {
+        alert('Please press play before iterating!');
+    } else {
+        // Get new game data
+        state.game.getData(true, state.height, state.width);
+        
+        // Turn on live cells
+        gameView.renderGame(state.game.data);    
+    }
 });
 
+//////////////////////////////////
+// WHEN USER RESIZES GRID
+//////////////////////////////////
+
 DOM.btnResize.addEventListener('click', () => {
+    // Turn off any currently live cells
+    gameView.clearBoard();
+    
     // Get current number of cells
-    let currentCellCount = [...document.querySelectorAll('.game__cell')].length;
+    const oldCellCount = state.height * state.width;
      
     // Get new height and width from input
-    const [newHeight, newWidth] = getGridSize();
+    [state.height, state.width] = gameView.getGridSize();
     
     // Reset CSS property grid-template-columns
-    DOM.grid.style.gridTemplateColumns = `repeat(${newWidth}, auto)`;
+    DOM.grid.style.gridTemplateColumns = `repeat(${state.width}, auto)`;
     
     // Render the board
-    let newCellCount = newHeight * newWidth;
-    renderBoard(currentCellCount, newCellCount);
+    let newCellCount = state.height * state.width;
+    gameView.renderBoard(oldCellCount, newCellCount);
     
-    if (newHeight > 20 && newHeight < 30) {
-        resizeCells('medium');
-    } else if (newHeight >= 30 && newHeight < 40) {
-        resizeCells('small');
-    } else if (newHeight >= 40) {
-        resizeCells('tiny');
+    // Resize cells if grid is more than 20 cells high
+    if (state.height > 20 && state.height < 30) {
+        gameView.resizeCells('medium');
+    } else if (state.height >= 30 && state.height < 40) {
+        gameView.resizeCells('small');
+    } else if (state.height >= 40) {
+        gameView.resizeCells('tiny');
+    } else if (state.height = 20) {
+        gameView.resizeCells('default');
     }
     
-
-    // Get data from game, given new height and width
-    let data = getData(false, newHeight, newWidth);
+    // Get game data 
+    state.game.getData(false, state.height, state.width);
     
-    // Based on data, mark cells live
-    renderGame(data);
+    // Turn on live cells
+    gameView.renderGame(state.game.data);
 });
