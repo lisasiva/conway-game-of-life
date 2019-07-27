@@ -1,0 +1,149 @@
+//////////////////////////////////
+// HEADER 
+//////////////////////////////////
+
+.header {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: .7rem 2rem;
+    margin-bottom: 1.5rem;
+    background-color: $color-gray-light-1;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    
+    &__logo{
+        flex: 0 1 auto;
+        margin-left: 2rem;
+        font-size: 2rem;
+    }
+    
+    
+    &__title {
+        flex: 0 1 auto;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        
+        .heading--primary {
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: .1rem;
+            text-align: center;
+            font-size: 2.4rem;
+            @include gradient-text;
+        }    
+    }
+    
+    &__github {
+        display: none;
+        flex: 0 1 auto;
+        margin-left: auto;
+        margin-right: 2rem;
+    }
+}
+
+//////////////////////////////////
+// GAME
+//////////////////////////////////
+
+.game {
+    
+    &__board {
+        display: grid;
+        grid-template-columns: repeat(20, auto);
+        border-top: 1px solid $color-gray-dark;
+        border-left: 1px solid $color-gray-dark;
+        margin: 0 20rem;
+        box-shadow: $box-shadow-light;
+    }
+    
+    &__cell {
+        display:inline-block;
+        width: $cell-size;
+        height: $cell-size;
+        background-color: $color-gray-light-1;
+        border-right: 1px solid $color-gray-dark;
+        border-bottom: 1px solid $color-gray-dark;
+        margin: 0;
+        padding: 0;
+        
+        &--live { background-color: $color-blue-bright; }
+    }
+    
+}
+
+
+
+//////////////////////////////////
+// CONTROLS
+//////////////////////////////////
+
+.controls {
+    &__size {
+        flex: 0 1 auto;
+        display: flex;
+        //flex-direction: column;
+        justify-content: center;
+        
+        .form-group {
+            display: flex;
+            justify-content: center;
+        }
+        
+        &-label {
+            color: $color-blue-bright;
+            font-size: 1.6rem;
+            letter-spacing: .5px;
+        }
+        
+        &-input {
+            width: 3rem;
+            background-color: transparent;
+            border: none;
+            border-bottom: .5px solid $color-blue-bright;
+            color: $color-white;
+            font-size: 1.4rem;
+            text-align: center;
+        }
+        
+        &-input:focus {
+            outline: none;
+            
+        }
+        
+        &-button {
+            margin-left: 1.5rem;
+            text-decoration: none;
+            color: $color-blue-bright;
+            font-size: 2rem;
+        }
+    }
+    
+    &__button {
+        height: 6rem;
+        width: 6rem;
+        border-radius: 50%;
+        //background-color: $color-gray-light-2;
+        position: relative;
+        
+        & i {
+            @include center-absolute;
+            font-size: 3rem;
+            color: rgba(95,209,249,1);
+        } 
+        
+        &--play {
+            flex: 0 1 auto;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        &--iterate {
+            flex: 0 1 auto;
+        }
+    }
+    
+    
+}

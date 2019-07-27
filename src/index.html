@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <!-- FAVICONS --> 
+    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+    <link rel="manifest" href="favicons/site.webmanifest">
+    
+    <!-- FONTS -->
+    <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+    
+    <!-- STYLESHEETS --> 
+    <link rel="stylesheet" href="css/style.css" />
+    
+    <title>Conway's Game of Life</title>
+</head>
+<body>
+       <div class="game__container">
+          
+           <div class="top">
+                <header class="header">
+                   <div class="header__logo">
+                       👾 
+                   </div>
+                   <div class="header__title">
+                       <h1 class="heading--primary"> The Game of Life</h1>
+                   </div>
+                   <div class="header__github">
+                        <i class="icon ion-logo-github"></i>
+                   </div>
+                </header>
+
+                <div class="game__board">
+                    <!-- FILL WITH CELLS -->
+                </div>         
+           </div>
+           
+            <!--<div class="bottom">-->
+                <div class="game__controls">
+                    <div class="controls__size">
+                       <div class="form-group">
+                            <!--<label for="height" class="controls__size-label">Height:</label>-->
+                            <input placeholder="20" class="controls__size-input" id="height"/>       
+                       </div>
+                        <div class="form-group">
+                            <label class="controls__size-label">&nbsp;x&nbsp;</label>
+                            <input placeholder="20" class="controls__size-input" id="width"/>
+                        </div>
+                        <div class="form-group">
+                            <a href="#" class="controls__size-button"><i class="icon ion-md-refresh"></i></a>
+                        </div>
+                    </div>
+                    <div class="controls__button controls__button--play">
+                        <i class="icon ion-md-play"></i>
+                    </div>
+                    <div class="controls__button controls__button--iterate">
+                        <!--<i class="icon ion-md-skip"></i>-->
+                        <i class="icon ion-md-fastforward"></i>
+                    </div>
+                </div>
+            </div>  
+
+        <!--</div>-->    
+</body>
+</html>
