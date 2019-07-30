@@ -121,14 +121,14 @@ export const renderGame = (data) => {
     // Loop through array of game data
     for (let i=0; i < data.length; i++) {
         
+        const cell = document.querySelector(`.game__cell--${i}`);
+        
         // When data array indicates a cell that's supposed to be live
         if (data[i] === 1) {
-            
-            // Select corresponding cell in DOM
-            const cell = document.querySelector(`.game__cell--${i}`);
-            
             // Toggle live class on 
             cell.classList.add('game__cell--live');
+        } else {
+            cell.classList.remove('game__cell--live');    
         }
     }    
 };

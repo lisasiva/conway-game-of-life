@@ -25,10 +25,12 @@ const init = (() => {
     gameView.renderBoard(0, 400);
     
     // Instantiate Game class 
-    state.game = new Game();
+    state.game = new Game(20, 20);
+    
+    gameView.renderGame(state.game.data);
     
     // Initialize height and width to 20
-    [state.height, state.width] = gameView.getGridSize();    
+    //[state.height, state.width] = gameView.getGridSize();    
 })();
 
 
@@ -38,13 +40,22 @@ const init = (() => {
 
 DOM.btnPlay.addEventListener('click', () => {
     // Remove class 'game__cell--live' from live cells 
-    gameView.clearBoard();
+    //gameView.clearBoard();
     
-    // Get new game data  
-    state.game.getData(false, state.height, state.width);
+    if (state.interval !== undefined) {
+        clearInterval(state.interval);
+        state.interval = undefined;
+    } else {
+        state.interval = setInterval(() => {
+            // Get new game data  
+            state.game.getData(true);
+
+            // Turn on live cells
+            gameView.renderGame(state.game.data);
+
+        }, 200);
+    }
     
-    // Turn on live cells
-    gameView.renderGame(state.game.data);
 });
 
 //////////////////////////////////
