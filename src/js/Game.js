@@ -10,13 +10,6 @@ export default class Game {
     }
     
     getData(shouldIterate) {
-        // Instantiate CellularAutomata with desired height and width
-        //const cellularAutomata = new CellularAutomata([height, width]); 
-        
-        // Select desired distribution of live cells
-        //cellularAutomata.fillWithDistribution([[0, 95], [1, 5]]);
-        
-        // If user has pressed iterate button, iterate
         if (shouldIterate) {
             this.cellularAutomata.setRule('23/3').iterate(1);
         }

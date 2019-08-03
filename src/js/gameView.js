@@ -99,34 +99,23 @@ export const resizeCells = (size) => {
 
 };
 
-//////////////////////////////////
-// CLEAR BOARD OF LIVE CELLS
-//////////////////////////////////
-
-export const clearBoard = () => {
-    // Select all live cells
-    const cells = [...document.querySelectorAll('.game__cell--live')];
-    
-    // For each of these live cells, turn off class 'game__cell--live"
-    cells.forEach(el => {
-        el.classList.toggle('game__cell--live');
-    });
-};
 
 //////////////////////////////////
-// TURN ON LIVE CELLS
+// TOGGLE CELLS LIVE AND DEAD
 //////////////////////////////////
 
 export const renderGame = (data) => {
     // Loop through array of game data
     for (let i=0; i < data.length; i++) {
         
+        // Select one cell at a time
         const cell = document.querySelector(`.game__cell--${i}`);
         
         // When data array indicates a cell that's supposed to be live
         if (data[i] === 1) {
             // Toggle live class on 
             cell.classList.add('game__cell--live');
+            // Else, remove live class
         } else {
             cell.classList.remove('game__cell--live');    
         }

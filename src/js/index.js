@@ -14,6 +14,7 @@ const state = {
         // data array
     // Current height of board
     // Current width of board
+    // Interval
 };
 
 //////////////////////////////////
@@ -29,8 +30,9 @@ const init = (() => {
     
     gameView.renderGame(state.game.data);
     
-    // Initialize height and width to 20
-    //[state.height, state.width] = gameView.getGridSize();    
+    state.height = 20;
+    state.width = 20;
+
 })();
 
 
@@ -39,9 +41,6 @@ const init = (() => {
 //////////////////////////////////
 
 DOM.btnPlay.addEventListener('click', () => {
-    // Remove class 'game__cell--live' from live cells 
-    //gameView.clearBoard();
-    
     if (state.interval !== undefined) {
         clearInterval(state.interval);
         state.interval = undefined;
@@ -63,16 +62,12 @@ DOM.btnPlay.addEventListener('click', () => {
 //////////////////////////////////
 
 DOM.btnIterate.addEventListener('click', () => {
-    // If the user has not pressed play yet, alert
-    if (state.game.data.length === 0) {
-        alert('Please press play before iterating!');
-    } else {
-        // Get new game data
-        state.game.getData(true, state.height, state.width);
-        
-        // Turn on live cells
-        gameView.renderGame(state.game.data);    
-    }
+    // Get new data
+    state.game.getData(true, state.height, state.width);
+
+    // Turn on live cells
+    gameView.renderGame(state.game.data);    
+    
 });
 
 //////////////////////////////////
@@ -80,8 +75,6 @@ DOM.btnIterate.addEventListener('click', () => {
 //////////////////////////////////
 
 DOM.btnResize.addEventListener('click', () => {
-    // Turn off any currently live cells
-    gameView.clearBoard();
     
     // Get current number of cells
     const oldCellCount = state.height * state.width;
@@ -108,7 +101,7 @@ DOM.btnResize.addEventListener('click', () => {
     }
     
     // Get game data 
-    state.game.getData(false, state.height, state.width);
+    state.game = new Game(state.height, state.width);
     
     // Turn on live cells
     gameView.renderGame(state.game.data);
