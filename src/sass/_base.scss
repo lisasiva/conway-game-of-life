@@ -16,7 +16,10 @@ $font-size-default: 1.6rem;
 $box-shadow-dark: 0 2rem 6rem rgba(0, 0, 0, 0.3);
 $box-shadow-light: 0 2rem 5rem rgba(0, 0, 0, 0.1);
 
-$cell-size: 20px;
+$cell-size-default: 20px;
+$cell-size-small: 15px;
+$cell-size-smaller: 10px;
+$cell-size-smallest: 8px;
 
 //////////////////////////////////
 // MIXINS
@@ -59,9 +62,34 @@ body {
     background-image: $gradient-blue;
     height: 100vh;
     background-size: cover;
-    //background-repeat: no-repeat;
     position: relative;
+
 }
 
+//////////////////////////////////
+// MEDIA QUERIES
+//////////////////////////////////
 
+@mixin for-desktop-large-up {
+    @media (min-width: 81.25em) { @content; }
+}
 
+@mixin for-tablet-portrait-down { 
+    @media (max-width: 68.75em) and (orientation: portrait) { @content; }
+}
+
+@mixin for-phone-medium-landscape-down {
+    @media (max-height: 31.25em) and (orientation: landscape) { @content; }
+}
+
+@mixin for-phone-small-landscape-down {
+    @media (max-height: 20em) and (orientation: landscape) { @content; }
+}
+
+@mixin for-phone-medium-portrait-down {
+    @media (max-width: 31.25em) and (orientation: portrait) { @content; }
+}
+
+@mixin for-phone-small-portrait-down {
+    @media (max-width: 25em) and (orientation: portrait) { @content; }
+}

@@ -70,30 +70,37 @@ export const renderBoard = (start, end) => {
 // RESIZE CELLS  
 //////////////////////////////////
 
-export const resizeCells = (size) => {
+export const resizeCells = (originalSize, newSize) => {
     // Get all cells currently in grid 
     const cells = [...document.querySelectorAll('.game__cell')];
     
+    // Get current cell size
+    const currentCellSize = cells[0].offsetWidth;
+    
     // Resize them according to height of grid
-    if (size === 'medium') {
+    if (newSize === 'medium') {
+        console.log('medium');
         cells.forEach(el => {
-            el.style.width = '15px';
-            el.style.height = '15px';
+            el.style.width = `${originalSize * 0.75}px`;
+            el.style.height = `${originalSize * 0.75}px`;
         });        
-    } else if (size === 'small') {
+    } else if (newSize === 'small') {
+        console.log('small');
         cells.forEach(el => {
-            el.style.width = '10px';
-            el.style.height = '10px';
+            el.style.width = `${originalSize * 0.5}px`;
+            el.style.height = `${originalSize * 0.5}px`;
         });
-    } else if (size === 'tiny') {
+    } else if (newSize === 'tiny') {
+        console.log('tiny');
         cells.forEach(el => {
-            el.style.width = '8px';
-            el.style.height = '8px';
-        });
-    } else if (size === 'default') {
+            el.style.width = `${originalSize * 0.4}px`;
+            el.style.height = `${originalSize * 0.4}px`;
+        });originalSize
+    } else if (newSize === 'default') {
+        console.log('default');
         cells.forEach(el => {
-            el.style.width = '20px';
-            el.style.height = '20px';    
+            el.style.width = `${originalSize}px`;
+            el.style.height = `${originalSize}px`;    
         });
     }
 
@@ -101,7 +108,7 @@ export const resizeCells = (size) => {
 
 
 //////////////////////////////////
-// TOGGLE CELLS LIVE AND DEAD
+// RENDER GAME FROM DATA ARRAY
 //////////////////////////////////
 
 export const renderGame = (data) => {
@@ -120,4 +127,20 @@ export const renderGame = (data) => {
             cell.classList.remove('game__cell--live');    
         }
     }    
+};
+
+//////////////////////////////////
+// TOGGLE LIVE CLASS ON CELL
+//////////////////////////////////
+
+export const toggleCell = (el) => {
+    el.classList.toggle('game__cell--live');
+};
+
+//////////////////////////////////
+// GET ID OF CLICKED CELL
+//////////////////////////////////
+
+export const getCellID = (el) => {
+    return el.className.split(' ')[1].split('--')[1];
 };

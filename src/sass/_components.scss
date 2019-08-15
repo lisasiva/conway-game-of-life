@@ -12,10 +12,19 @@
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     
-    &__logo{
+    @include for-phone-medium-portrait-down {
+        padding: .7rem 1rem;
+    }
+    
+    
+    &__logo {
         flex: 0 1 auto;
         margin-left: 2rem;
         font-size: 2rem;
+        
+        @include for-phone-medium-portrait-down {
+            margin-left: 1rem;
+        }
     }
     
     
@@ -32,15 +41,24 @@
             text-align: center;
             font-size: 2.4rem;
             @include gradient-text;
+            
+            @include for-phone-small-landscape-down {
+                font-size: 2rem;
+                font-weight: 400;
+            }
+            
+            @include for-phone-medium-portrait-down {
+                font-size: 1.8rem;
+                font-weight: 400;
+            }
+            
+            @include for-phone-small-portrait-down {
+                line-height: normal;
+            }
+
         }    
     }
     
-    &__github {
-        display: none;
-        flex: 0 1 auto;
-        margin-left: auto;
-        margin-right: 2rem;
-    }
 }
 
 //////////////////////////////////
@@ -56,18 +74,25 @@
         border-left: 1px solid $color-gray-dark;
         box-shadow: $box-shadow-light;
         
-        // TESTING
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -53%);
         
+        @include for-phone-medium-landscape-down {
+            transform: translate(-50%, -57%);
+        }
+        
+        @include for-phone-medium-portrait-down {
+            transform: translate(-50%, -60%);
+        }
+        
     }
     
     &__cell {
         display:inline-block;
-        width: $cell-size;
-        height: $cell-size;
+        width: $cell-size-default;
+        height: $cell-size-default;
         background-color: $color-gray-light-1;
         border-right: 1px solid $color-gray-dark;
         border-bottom: 1px solid $color-gray-dark;
@@ -75,6 +100,21 @@
         padding: 0;
         
         &--live { background-color: $color-blue-bright; }
+        
+        @include for-phone-medium-landscape-down {
+            width: $cell-size-smaller;
+            height: $cell-size-smaller;
+        }
+        
+        @include for-phone-small-landscape-down {
+            width: $cell-size-smallest;
+            height: $cell-size-smallest;
+        }
+        
+        @include for-phone-medium-portrait-down {
+            width: $cell-size-small;
+            height: $cell-size-small;
+        }
     }
     
 }
@@ -97,6 +137,7 @@
         .form-group {
             display: flex;
             justify-content: center;
+            align-items: center;
         }
         
         &-label {
@@ -113,6 +154,12 @@
             color: $color-white;
             font-size: 1.4rem;
             text-align: center;
+            
+            @include for-phone-medium-portrait-down {
+                width: 2rem;
+                font-size: 1.4rem;
+                line-height: 2rem;
+            }
         }
         
         &-input:focus {
@@ -125,6 +172,20 @@
             text-decoration: none;
             color: $color-blue-bright;
             font-size: 2rem;
+            
+            @include for-phone-medium-landscape-down {
+                margin-left: 1.3rem;
+                font-size: 1.8rem;
+            }
+            
+            @include for-phone-small-landscape-down {
+                font-size: 1.6rem;
+            }
+            
+            @include for-phone-medium-portrait-down {
+                margin-left: 1rem;
+                font-size: 1.6rem;
+            }
         }
     }
     
@@ -135,10 +196,30 @@
         //background-color: $color-gray-light-2;
         position: relative;
         
+        @include for-phone-medium-landscape-down {
+            width: 10rem;
+        }
+        
+        @include for-phone-medium-portrait-down {
+            width: 8rem;
+        }
+        
         & i {
             @include center-absolute;
             font-size: 3rem;
             color: rgba(95,209,249,1);
+            
+            @include for-phone-medium-landscape-down {
+                font-size: 2.2rem;
+            }
+            
+            @include for-phone-small-landscape-down {
+                font-size: 2rem;
+            }
+            
+            @include for-phone-medium-portrait-down {
+                font-size: 1.8rem;
+            }
         } 
         
         &--play {

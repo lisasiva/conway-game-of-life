@@ -26,10 +26,16 @@ body {
   background-color: #faf9f9;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px; }
+  @media (max-width: 31.25em) and (orientation: portrait) {
+    .header {
+      padding: .7rem 1rem; } }
   .header__logo {
     flex: 0 1 auto;
     margin-left: 2rem;
     font-size: 2rem; }
+    @media (max-width: 31.25em) and (orientation: portrait) {
+      .header__logo {
+        margin-left: 1rem; } }
   .header__title {
     flex: 0 1 auto;
     position: absolute;
@@ -44,11 +50,17 @@ body {
       background: radial-gradient(circle farthest-corner at 12.3% 19.3%, #5558da 0%, #5fd1f9 100.2%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent; }
-  .header__github {
-    display: none;
-    flex: 0 1 auto;
-    margin-left: auto;
-    margin-right: 2rem; }
+      @media (max-height: 20em) and (orientation: landscape) {
+        .header__title .heading--primary {
+          font-size: 2rem;
+          font-weight: 400; } }
+      @media (max-width: 31.25em) and (orientation: portrait) {
+        .header__title .heading--primary {
+          font-size: 1.8rem;
+          font-weight: 400; } }
+      @media (max-width: 25em) and (orientation: portrait) {
+        .header__title .heading--primary {
+          line-height: normal; } }
 
 .game__board {
   display: grid;
@@ -60,6 +72,12 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -53%); }
+  @media (max-height: 31.25em) and (orientation: landscape) {
+    .game__board {
+      transform: translate(-50%, -57%); } }
+  @media (max-width: 31.25em) and (orientation: portrait) {
+    .game__board {
+      transform: translate(-50%, -60%); } }
 
 .game__cell {
   display: inline-block;
@@ -72,6 +90,18 @@ body {
   padding: 0; }
   .game__cell--live {
     background-color: #5fd1f9; }
+  @media (max-height: 31.25em) and (orientation: landscape) {
+    .game__cell {
+      width: 10px;
+      height: 10px; } }
+  @media (max-height: 20em) and (orientation: landscape) {
+    .game__cell {
+      width: 8px;
+      height: 8px; } }
+  @media (max-width: 31.25em) and (orientation: portrait) {
+    .game__cell {
+      width: 15px;
+      height: 15px; } }
 
 .grid-wrapper {
   width: 100%; }
@@ -82,7 +112,8 @@ body {
   justify-content: center; }
   .controls__size .form-group {
     display: flex;
-    justify-content: center; }
+    justify-content: center;
+    align-items: center; }
   .controls__size-label {
     color: #5fd1f9;
     font-size: 1.6rem;
@@ -95,6 +126,11 @@ body {
     color: #fff;
     font-size: 1.4rem;
     text-align: center; }
+    @media (max-width: 31.25em) and (orientation: portrait) {
+      .controls__size-input {
+        width: 2rem;
+        font-size: 1.4rem;
+        line-height: 2rem; } }
   .controls__size-input:focus {
     outline: none; }
   .controls__size-button {
@@ -102,12 +138,29 @@ body {
     text-decoration: none;
     color: #5fd1f9;
     font-size: 2rem; }
+    @media (max-height: 31.25em) and (orientation: landscape) {
+      .controls__size-button {
+        margin-left: 1.3rem;
+        font-size: 1.8rem; } }
+    @media (max-height: 20em) and (orientation: landscape) {
+      .controls__size-button {
+        font-size: 1.6rem; } }
+    @media (max-width: 31.25em) and (orientation: portrait) {
+      .controls__size-button {
+        margin-left: 1rem;
+        font-size: 1.6rem; } }
 
 .controls__button {
   height: 6rem;
   width: 6rem;
   border-radius: 50%;
   position: relative; }
+  @media (max-height: 31.25em) and (orientation: landscape) {
+    .controls__button {
+      width: 10rem; } }
+  @media (max-width: 31.25em) and (orientation: portrait) {
+    .controls__button {
+      width: 8rem; } }
   .controls__button i {
     position: absolute;
     top: 50%;
@@ -115,6 +168,15 @@ body {
     transform: translate(-50%, -50%);
     font-size: 3rem;
     color: #5fd1f9; }
+    @media (max-height: 31.25em) and (orientation: landscape) {
+      .controls__button i {
+        font-size: 2.2rem; } }
+    @media (max-height: 20em) and (orientation: landscape) {
+      .controls__button i {
+        font-size: 2rem; } }
+    @media (max-width: 31.25em) and (orientation: portrait) {
+      .controls__button i {
+        font-size: 1.8rem; } }
   .controls__button--play {
     flex: 0 1 auto;
     position: absolute;
@@ -137,6 +199,19 @@ body {
   border-radius: 15px;
   width: 75vw;
   height: 95vh; }
+  @media (min-width: 81.25em) {
+    .game__container {
+      height: 70vh; } }
+  @media (max-width: 68.75em) and (orientation: portrait) {
+    .game__container {
+      height: 65vh; } }
+  @media (max-width: 31.25em) and (orientation: portrait) {
+    .game__container {
+      width: 85vw;
+      height: 90vh; } }
+  @media (max-width: 25em) and (orientation: portrait) {
+    .game__container {
+      width: 95vw; } }
 
 .top {
   background-color: #f4f2f2;
@@ -145,6 +220,19 @@ body {
   padding-bottom: 1.5rem;
   width: 75vw;
   height: 85vh; }
+  @media (min-width: 81.25em) {
+    .top {
+      height: 60vh; } }
+  @media (max-width: 68.75em) and (orientation: portrait) {
+    .top {
+      height: 55vh; } }
+  @media (max-width: 31.25em) and (orientation: portrait) {
+    .top {
+      width: 85vw;
+      height: 75vh; } }
+  @media (max-width: 25em) and (orientation: portrait) {
+    .top {
+      width: 95vw; } }
 
 .game__controls {
   display: flex;

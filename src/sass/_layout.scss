@@ -12,6 +12,24 @@
     border-radius: 15px;
     width: 75vw;
     height: 95vh;
+    
+    @include for-desktop-large-up {
+        height: 70vh;
+    }
+    
+    @include for-tablet-portrait-down {
+        height: 65vh;
+    }
+    
+    @include for-phone-medium-portrait-down {
+        width: 85vw;
+        height: 90vh;
+    }
+    
+    @include for-phone-small-portrait-down {
+        width: 95vw;
+    }
+    
 
 }
 
@@ -22,6 +40,24 @@
     padding-bottom: 1.5rem;
     width: 75vw;
     height: 85vh;
+    
+    @include for-desktop-large-up {
+        height: 60vh;
+    }
+    
+    @include for-tablet-portrait-down {
+        height: 55vh;
+    }
+    
+    @include for-phone-medium-portrait-down {
+        width: 85vw;
+        height: 75vh;
+    }
+    
+    @include for-phone-small-portrait-down {
+        width: 95vw;
+    }
+    
 }
 
 .game__controls {

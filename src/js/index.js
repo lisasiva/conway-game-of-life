@@ -11,10 +11,11 @@ import * as gameView from './gameView';
 
 const state = {
     // Instance of Game class
-        // data array
-    // Current height of board
-    // Current width of board
-    // Interval
+        // data (array)
+    // Current height of board (# cells)
+    // Current width of board (# cells)
+    // Interval (number)
+    // Original height of cell (px)
 };
 
 //////////////////////////////////
@@ -32,6 +33,7 @@ const init = (() => {
     
     state.height = 20;
     state.width = 20;
+    state.cellSizeOriginal = DOM.grid.firstElementChild.offsetWidth;
 
 })();
 
@@ -91,13 +93,13 @@ DOM.btnResize.addEventListener('click', () => {
     
     // Resize cells if grid is more than 20 cells high
     if (state.height > 20 && state.height < 30) {
-        gameView.resizeCells('medium');
+        gameView.resizeCells(state.cellSizeOriginal, 'medium');
     } else if (state.height >= 30 && state.height < 40) {
-        gameView.resizeCells('small');
+        gameView.resizeCells(state.cellSizeOriginal, 'small');
     } else if (state.height >= 40) {
-        gameView.resizeCells('tiny');
-    } else if (state.height = 20) {
-        gameView.resizeCells('default');
+        gameView.resizeCells(state.cellSizeOriginal, 'tiny');
+    } else if (state.height === 20) {
+        gameView.resizeCells(state.cellSizeOriginal, 'default');
     }
     
     // Get game data 
@@ -105,4 +107,26 @@ DOM.btnResize.addEventListener('click', () => {
     
     // Turn on live cells
     gameView.renderGame(state.game.data);
+});
+
+//////////////////////////////////
+// WHEN USER CLICKS CELL
+//////////////////////////////////
+
+DOM.grid.addEventListener('click', (event) => {
+    console.log(state.game.data);
+    // Get number of cell that was clicked 
+    const cellID = gameView.getCellID(event.target);
+    
+    // Toggle 'game__cell--live' class on or off
+    gameView.toggleCell(event.target);
+    
+    // Update data array
+    if (state.game.data[cellID] === 0) {
+        state.game.data[cellID] = 1;
+    } else {
+        state.game.data[cellID] = 0;
+    }
+    
+    console.log(state.game.data);
 });
