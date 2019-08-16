@@ -144,3 +144,16 @@ export const toggleCell = (el) => {
 export const getCellID = (el) => {
     return el.className.split(' ')[1].split('--')[1];
 };
+
+
+//////////////////////////////////
+// TOGGLE PLAY / PAUSE BUTTON  
+//////////////////////////////////
+
+export const togglePlayButton = () => {
+    const button = DOM.btnPlay.firstElementChild;
+    
+    button.classList.toggle('fa-play');
+    button.classList.toggle('fa-pause');
+    
+}

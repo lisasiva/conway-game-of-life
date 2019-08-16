@@ -43,6 +43,8 @@ const init = (() => {
 //////////////////////////////////
 
 DOM.btnPlay.addEventListener('click', () => {
+    gameView.togglePlayButton();
+    
     if (state.interval !== undefined) {
         clearInterval(state.interval);
         state.interval = undefined;
